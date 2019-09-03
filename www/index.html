@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+
+	<title>Ninja Kho</title>
+
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/examples.js"></script>
+	<script type="text/javascript" src="js/tweenjs-NEXT.min.js"></script>
+	<script type="text/javascript" src="js/preloadjs-NEXT.min.js"></script>
+	<script type="text/javascript" src="js/soundjs-NEXT.min.js"></script>
+	<script type="text/javascript" src="js/easeljs-NEXT.min.js"></script>
+	<!--<script type="text/javascript" src="js/ndgmr.Collision.js"></script>-->
+
+
+	<script type="text/javascript" src="js/script/1_global.js"></script>
+	<script type="text/javascript" src="js/script/2_sprites.js"></script>
+	<script type="text/javascript" src="js/script/3_helper.js"></script>
+	<script type="text/javascript" src="js/script/4_actions.js"></script>
+	<script type="text/javascript" src="js/script/5_heartbeat.js"></script>
+
+
+	<!-- We also provide hosted minified versions of all CreateJS libraries.
+	  http://code.createjs.com -->
+
+	<script id="editable">
+		// Wait for device API libraries to load
+		//
+		document.addEventListener("deviceready", onDeviceReady, false);
+
+		// device APIs are available
+		//
+		function onDeviceReady() {
+
+			screen.orientation.lock('landscape');
+			cordova.plugins.backgroundMode.setEnabled(false);
+			init();
+		}
+
+
+
+		function init() {
+
+			examples.showDistractor();
+
+			createjs.MotionGuidePlugin.install(createjs.Tween);
+
+			canvas = document.getElementById("testCanvas");
+
+			// grab canvas width and height for later calculations:
+			w = 1334; //window.innerWidth;
+			h = 750; //window.innerHeight;
+
+
+			canvas.width = w;
+			canvas.height = h;
+
+
+			stage = new createjs.Stage(canvas);
+			stage.autoClear = true;
+
+			// enable touch interactions if supported on the current device:
+			createjs.Touch.enable(stage);
+
+			// enabled mouse over / out events
+			stage.enableMouseOver(10);
+			stage.mouseMoveOutside = true; // keep tracking the mouse even when it leaves the canvas
+
+
+			preLoadingAssets();
+
+
+		}
+	</script>
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<canvas id="testCanvas"></canvas>
+		<div class="ground_tiles"></div>
+
+		<div id="btnPlay" class="btn-play">
+			<span ontouchstart="playGame()">Press to Play</span>
+			<div class="best-score-text">Best score: <span id="bestScore">0</span></div>
+		</div>
+
+		<div class="score-text">Score: <span id="score">0</span></div>
+		<div class="hp-text hidden">HP: <span id="hp">100%</span></div>
+
+		<ul class="btn-move hidden">
+			<li id="btnLeft" class="a-btn" ontouchstart="handleLeftStart()">Left</li>
+			<li id="btnRight" class="a-btn" ontouchstart="handleRightStart()">Right</li>
+		</ul>
+
+		<ul class="btn-action hidden">
+			<li id="btnShoot" class="d-btn" ontouchstart="handleShootStart()">Shoot</li>
+			<li id="btnJump" class="b-btn" ontouchstart="handleJumpStart()">Jump</li>
+			<li id="btnFly" class="c-btn" ontouchstart="handleSlideStart()">Slide</li>
+		</ul>
+
+		<div class="btn-screen-left" ontouchstart="handleJumpStart()"></div>
+		<div class="btn-screen-right" ontouchstart="handleSlideStart()"></div>
+
+
+	</div>
+
+
+</body>
+
+</html>

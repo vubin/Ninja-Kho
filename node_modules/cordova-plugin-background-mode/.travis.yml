@@ -50,7 +50,7 @@ install:
 before_script:
 - cordova create myApp org.apache.cordova.myApp myApp
 - cd myApp
-- sed -i -r 's:\(<content.*\):\1<preference name="android-targetSdkVersion" value="16" />:' config.xml
+- sed -i -r 's:\(<content.*\):\1<preference name="android-targetSdkVersion" value="28" />:' config.xml
 - cordova platform add android@latest browser@latest ios@latest
 - cordova plugin add cordova-plugin-background-mode --searchpath $TRAVIS_BUILD_DIR
 - cordova platform ls
